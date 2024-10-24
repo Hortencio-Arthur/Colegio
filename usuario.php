@@ -1,17 +1,17 @@
 <?php
-include 'bd.php';
+include 'db.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $nome = $_POST['nome'];
     $telefone = $_POST['telefone'];
-    $edereco = $_POST['ENDEREÇO'];
-    $usuario = $_POST['usuarios'];
+    $edereco = $_POST['endereco'];
+    $email = $_POST['email'];
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 }
-$sql ="INSERT INTO usuario (nome,telefone, endereco, usuario, senha) VALUES (?,?,?,?,?) ";
-$sql = $pdo-> prepare($sql);
+$sql ="INSERT INTO usuario (nome,telefone, email, senha) VALUES (?,?,?,?) ";
+$stmt = $pdo-> prepare($sql);
 
-if($start->execute([$nome, $telefone, $endereco, $usuario, $senha])){
+if($stmt->execute([$nome, $telefone, $email, $senha])){
     echo "Usuaruio cadastrado com sucesso!";
 }else{
     echo "Erro ao cadastrar o usuario.";
@@ -33,7 +33,7 @@ if($start->execute([$nome, $telefone, $endereco, $usuario, $senha])){
         <label for="telefone">Telefone:</label><br>
         <input type= "text" id="telefone" name="telefone" required><br><br>
 
-        <label for = "endereco">Endereço:</label>
+        <label for = "endereco">Endereco:</label>
         <input type="text" id="endereco" name="endereco" redired><br><br>
 
         <label for="usuarios">usuarios</label>
